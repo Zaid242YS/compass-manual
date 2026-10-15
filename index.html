@@ -1,0 +1,901 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Iqama Compass User's Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Nunito+Sans:wght@400;600;700;800&display=swap">
+<style>
+/* Layout concept: a printed handbook on screen. Green-and-gold cover, sticky contents rail, one column of chapters, tables and callouts that mirror the app's own look. */
+:root{
+  --bg:#EEF4EF; --surface:#FFFFFF; --surface2:#F4F9F4; --ink:#10281C; --muted:#4A6354; --line:#D1DFD4;
+  --green:#0F6B4A; --green-d:#0A4D36; --gold:#C8961E; --gold-soft:#F7E9BF; --hero1:#0A4D36; --hero2:#0F6B4A;
+  --good:#1E8E5A; --warn:#A86B0C; --bad:#C0392B; --on-s:#FFFFFF;
+  --s1:#0F6B4A; --s2:#2A7FB8; --s3:#7A4FB5; --s4:#D9822B; --s5:#C2405A; --s6:#B9871A;
+  --shadow:0 1px 2px rgba(16,40,28,.06),0 6px 20px rgba(16,40,28,.07);
+  --display:'Amiri','Georgia','Times New Roman',serif; --body:'Nunito Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0B1812; --surface:#12261C; --surface2:#173025; --ink:#E8F2EA; --muted:#9DB8A7; --line:#274438;
+  --green:#3FBF8A; --green-d:#2A9A6C; --gold:#E3B547; --gold-soft:#3A3114; --hero1:#0A3A29; --hero2:#0F5A3F;
+  --good:#4CC98A; --warn:#E3B547; --bad:#F07A6B; --on-s:#07140D;
+  --s1:#3FBF8A; --s2:#5AB0E8; --s3:#A98AE0; --s4:#F0A24F; --s5:#E8708A; --s6:#E3B547;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1812; --surface:#12261C; --surface2:#173025; --ink:#E8F2EA; --muted:#9DB8A7; --line:#274438;
+  --green:#3FBF8A; --green-d:#2A9A6C; --gold:#E3B547; --gold-soft:#3A3114; --hero1:#0A3A29; --hero2:#0F5A3F;
+  --good:#4CC98A; --warn:#E3B547; --bad:#F07A6B; --on-s:#07140D;
+  --s1:#3FBF8A; --s2:#5AB0E8; --s3:#A98AE0; --s4:#F0A24F; --s5:#E8708A; --s6:#E3B547;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.35); color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 var(--body);-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.2;margin:0;text-wrap:balance}
+h2{font-size:32px;color:var(--green)}
+h3{font-size:23px;margin-top:26px;color:var(--ink)}
+h4{font-size:18px;margin-top:18px;color:var(--green)}
+p{margin:0}
+a{color:var(--green)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1220px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+
+/* Cover */
+.cover{background:linear-gradient(135deg,var(--hero1),var(--hero2));color:#fff;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23E3B547' stroke-opacity='.22' stroke-width='1'%3E%3Crect x='16' y='16' width='32' height='32'/%3E%3Crect x='16' y='16' width='32' height='32' transform='rotate(45 32 32)'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(135deg,var(--hero1),var(--hero2))}
+.cover .wrap{padding-block:44px 40px;display:grid;gap:12px;text-align:center;justify-items:center}
+.basmala{font-family:var(--display);font-size:32px;color:#F7E9BF;direction:rtl;line-height:1.5}
+.cover h1{font-size:clamp(36px,6.5vw,62px);color:#fff}
+.cover h1 span{color:#F2CB62}
+.cover .sub{font-family:var(--display);font-size:clamp(20px,3vw,28px);color:#F7E9BF}
+.cover .meta{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.cover .pill{border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:4px 14px;font-weight:700;font-size:13px;background:rgba(255,255,255,.1)}
+.cover p{max-width:70ch;color:#E3F3E8}
+.pbtn{margin-top:6px;border:0;border-radius:10px;padding:10px 18px;background:#F2CB62;color:#3A2A00;font:800 14.5px var(--body);cursor:pointer;min-height:42px}
+.pbtn:hover{background:#F7D97F}
+
+/* Layout */
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:34px;align-items:start;padding-block:28px 48px}
+.toc{position:sticky;top:calc(14px + env(safe-area-inset-top,0px));max-height:calc(100vh - 28px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+.toc summary{font-family:var(--display);font-size:21px;font-weight:700;color:var(--green);cursor:pointer;list-style:none}
+.toc summary::-webkit-details-marker{display:none}
+.toc ol{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:2px;font-size:14.5px}
+.toc a{display:flex;gap:8px;text-decoration:none;color:var(--ink);padding:5px 8px;border-radius:8px}
+.toc a:hover{background:var(--surface2)}
+.toc a.on{background:var(--green);color:var(--on-s);font-weight:700}
+.toc b{min-width:22px;color:var(--gold)}
+.toc a.on b{color:inherit}
+.toc .sep{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--muted);padding:8px 8px 2px}
+@media (max-width:920px){.layout{grid-template-columns:minmax(0,1fr);gap:18px}.toc{position:static;max-height:none}}
+
+main{min-width:0;display:grid;gap:30px}
+.chap{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px;box-shadow:var(--shadow);display:grid;gap:14px;min-width:0}
+@media (max-width:600px){.chap{padding:18px}h2{font-size:27px}}
+.chap>h2{display:flex;gap:14px;align-items:baseline;border-bottom:2px solid var(--gold);padding-bottom:8px}
+.cn{font-size:20px;background:var(--green);color:var(--on-s);border-radius:50%;width:38px;height:38px;display:inline-grid;place-items:center;flex:0 0 auto;font-family:var(--body);font-weight:800}
+.prose{max-width:78ch;display:grid;gap:12px}
+ul,ol{margin:0;padding-left:22px;display:grid;gap:6px}
+.lead{font-size:18px;color:var(--muted);max-width:75ch}
+
+/* Callouts */
+.note,.tip,.warn{border-left:5px solid var(--gold);background:var(--gold-soft);border-radius:0 12px 12px 0;padding:12px 16px;font-size:15px;max-width:80ch}
+.tip{border-color:var(--green);background:color-mix(in srgb,var(--green) 10%,var(--surface))}
+.warn{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,var(--surface))}
+.note>b:first-child,.tip>b:first-child,.warn>b:first-child{display:block;font-family:var(--display);font-size:17px;margin-bottom:2px}
+
+/* Steps */
+.steps{list-style:none;padding:0;counter-reset:st;display:grid;gap:12px}
+.steps>li{counter-increment:st;display:grid;grid-template-columns:42px minmax(0,1fr);gap:14px;align-items:start;background:var(--surface2);border:1px solid var(--line);border-radius:14px;padding:14px}
+.steps>li::before{content:counter(st);width:42px;height:42px;border-radius:50%;background:var(--c,var(--green));color:var(--on-s);font-family:var(--display);font-weight:700;font-size:22px;display:grid;place-items:center}
+.steps b.t{display:block;font-family:var(--display);font-size:19px;color:var(--ink)}
+
+/* Tables */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface2);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right}
+caption{caption-side:top;text-align:left;font-weight:800;padding:10px 12px;color:var(--ink);font-size:14px}
+
+/* UI mockups */
+.ui{display:inline-block;border:1px solid var(--line);border-radius:7px;padding:0 8px;font-weight:800;font-size:14px;background:var(--surface2);white-space:nowrap}
+.bm{display:inline-block;border-radius:9px;padding:5px 12px;font-weight:800;font-size:13.5px;white-space:nowrap}
+.bm.gold{background:#F2CB62;color:#3A2A00}
+.bm.ghost{background:var(--hero1);color:#fff;border:1px solid rgba(255,255,255,.4)}
+.bm.green{background:var(--green);color:var(--on-s)}
+.bm.line{border:1.5px solid var(--green);color:var(--green)}
+.bm.danger{border:1.5px solid var(--bad);color:var(--bad)}
+.pill{display:inline-flex;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:800;background:var(--surface2);border:1px solid var(--line)}
+.pill.good{color:var(--good);border-color:var(--good)}.pill.warn{color:var(--warn);border-color:var(--warn)}.pill.bad{color:var(--bad);border-color:var(--bad)}.pill.gold{background:var(--gold-soft);color:var(--ink);border-color:var(--gold)}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:middle;background:var(--c)}
+
+/* Figures */
+figure{margin:0;display:grid;gap:8px}
+figcaption{font-size:13.5px;color:var(--muted)}
+.fig{border:1px solid var(--line);border-radius:14px;background:var(--surface2);padding:14px;overflow-x:auto}
+.fig svg{display:block;width:100%;height:auto;min-width:620px}
+.legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 18px;font-size:14.5px}
+@media (max-width:700px){.legend{grid-template-columns:minmax(0,1fr)}}
+.legend b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--gold);color:#2B2000;font-size:12px;margin-right:8px}
+
+/* Stage cards */
+.stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.stages{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.stages{grid-template-columns:minmax(0,1fr)}}
+.stage{border:1px solid var(--line);border-top:6px solid var(--c);border-radius:14px;padding:12px 14px;background:var(--surface);display:grid;gap:3px;align-content:start}
+.stage h4{margin:0;color:var(--c)}
+.stage p{font-size:14px;color:var(--muted)}
+.stage .w{font-size:13px;font-weight:800}
+
+.wbar{display:grid;grid-template-columns:110px minmax(0,1fr) 46px;gap:10px;align-items:center;font-size:14.5px}
+.wbar>i{display:block;height:12px;border-radius:999px;background:var(--surface2);border:1px solid var(--line);overflow:hidden}
+.wbar>i>s{display:block;height:100%;background:var(--c);text-decoration:none}
+
+dl.gl{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+dl.gl dt,dl.gl dd{margin:0;padding:10px 14px;border-bottom:1px solid var(--line)}
+dl.gl dt{font-weight:800;background:var(--surface2);color:var(--green)}
+dl.gl dt:last-of-type,dl.gl dd:last-of-type{border-bottom:0}
+@media (max-width:600px){dl.gl{grid-template-columns:minmax(0,1fr)}dl.gl dt{border-bottom:0;padding-bottom:0}}
+details.faq{border:1px solid var(--line);border-radius:12px;background:var(--surface2);padding:2px 14px}
+details.faq summary{cursor:pointer;font-weight:800;padding:10px 0;color:var(--ink)}
+details.faq[open] summary{color:var(--green)}
+details.faq>div{padding:0 0 12px;display:grid;gap:8px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.kbox{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--surface2);display:grid;gap:6px;align-content:start}
+.kbox h4{margin:0}
+
+footer.site{background:var(--hero1);color:#E3F3E8}
+footer.site .wrap{padding-block:24px;display:grid;gap:6px;text-align:center}
+footer.site b{color:#F2CB62;font-family:var(--display);font-size:21px}
+
+@media print{
+  :root:not([data-theme="__p"]){--bg:#fff;--surface:#fff;--surface2:#F1F6F2;--ink:#15261c;--muted:#4A6354;--line:#D1DFD4;--green:#0F6B4A;--gold:#C8961E;--gold-soft:#F7E9BF;--on-s:#fff;
+    --s1:#0F6B4A;--s2:#2A7FB8;--s3:#7A4FB5;--s4:#D9822B;--s5:#C2405A;--s6:#B9871A;--good:#1E8E5A;--warn:#A86B0C;--bad:#C0392B;--hero1:#0A4D36;--hero2:#0F6B4A;color-scheme:light}
+  @page{size:A4;margin:14mm 13mm}
+  body{background:#fff;font-size:10.8pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .wrap{padding:0;max-width:none}
+  .cover{break-after:page;margin:-14mm -13mm 0;padding:30mm 13mm 24mm}
+  .layout{display:block;padding:0}
+  .toc{position:static;max-height:none;box-shadow:none;border:0;padding:0;break-after:page}
+  .toc ol{grid-template-columns:repeat(2,minmax(0,1fr));font-size:11pt}
+  main{display:block}
+  .chap{box-shadow:none;border:0;padding:0;margin-bottom:10mm;border-radius:0}
+  .chap.pb{break-before:page}
+  h2,h3,h4{break-after:avoid}
+  .steps>li,.stage,.kbox,.fig,.note,.tip,.warn,details.faq,tr,caption{break-inside:avoid}
+  caption{break-after:avoid}
+  .tablewrap{overflow:visible}
+  .fig{overflow:visible}.fig svg{min-width:0}
+  details.faq>div{display:grid}
+  footer.site{break-before:avoid}
+  a{color:inherit;text-decoration:none}
+  .noprint{display:none!important}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="cover"><div class="wrap">
+  <div class="basmala" lang="ar" dir="rtl">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ</div>
+  <h1>Iqama <span>Compass</span></h1>
+  <div class="sub">User's Manual</div>
+  <p>How to plan a lawful, long-standing work Iqama for yourself and your family, using the Creed-to-Commerce™ framework and Saudi Vision 2030 as your guide.</p>
+  <div class="meta"><span class="pill">Manual edition 1.0</span><span class="pill">October 2026</span><span class="pill">The Balanced Middle Path Academy, LLC</span></div>
+  <button class="pbtn noprint" id="printMan" type="button">Print or save this manual as PDF</button>
+</div></header>
+
+<div class="wrap layout">
+<aside><details class="toc" id="toc" open>
+  <summary>Contents</summary>
+  <ol>
+    <li><a href="#c1"><b>1</b>Welcome</a></li>
+    <li><a href="#c2"><b>2</b>Quick start</a></li>
+    <li><a href="#c3"><b>3</b>Installing and opening</a></li>
+    <li><a href="#c4"><b>4</b>Your data and privacy</a></li>
+    <li><a href="#c5"><b>5</b>Tab-by-tab guide</a></li>
+    <li><a href="#c6"><b>6</b>How the numbers work</a></li>
+    <li><a href="#c7"><b>7</b>Printing the report</a></li>
+    <li><a href="#c8"><b>8</b>Coaching workflows</a></li>
+    <li><a href="#c9"><b>9</b>Worked example</a></li>
+    <li><a href="#c10"><b>10</b>Troubleshooting and FAQ</a></li>
+    <li><a href="#c11"><b>11</b>Glossary</a></li>
+    <li><a href="#c12"><b>12</b>Limits and sources</a></li>
+    <li class="sep">Appendices</li>
+    <li><a href="#ca"><b>A</b>Fee and rule reference</a></li>
+    <li><a href="#cb"><b>B</b>Template task list</a></li>
+  </ol>
+</details></aside>
+
+<main>
+<!-- 1 -->
+<section class="chap" id="c1">
+  <h2><span class="cn">1</span>Welcome</h2>
+  <p class="lead">Iqama Compass turns scattered Iqama advice into one personal plan. You enter your situation once, and the app ranks your routes, estimates your timeline and costs, tests your family plan, and prints a branded report.</p>
+  <div class="prose">
+    <h3>Who this app is for</h3>
+    <ul>
+      <li><b>Individual professionals</b> outside Saudi Arabia who want to know which work route fits their degree, experience, salary, and capital.</li>
+      <li><b>Families</b> deciding whether and when to bring a spouse and children, and what it costs each year.</li>
+      <li><b>Entrepreneurs and investors</b> comparing sponsor-free Premium Residency with building a licensed Saudi business.</li>
+      <li><b>Coaches and consultants</b> who need a client-ready report. Section 8 shows how to run a session with it.</li>
+    </ul>
+    <h3>What the app does not do</h3>
+    <ul>
+      <li>It does not file anything with a government, and it does not connect to Qiwa, Absher, or any official system.</li>
+      <li>It does not give legal or immigration advice, and its scores do not predict an official decision.</li>
+      <li>It does not cover student residency. It covers work-based residency only.</li>
+      <li>It does not sync between devices. Your answers live in the browser you use (Chapter 4).</li>
+    </ul>
+  </div>
+  <h3>The Creed-to-Commerce™ stages</h3>
+  <p class="muted">Everything in the app is organized around six stages. Each stage is scored on your Profile, tracked on your Action Plan, and shown in your report. The percentage is how much that stage counts toward your overall readiness score.</p>
+  <div class="stages">
+    <div class="stage" style="--c:var(--s1)"><h4>1. Creed</h4><p>Purpose, principles, and family agreement.</p><span class="w">10% of overall score</span></div>
+    <div class="stage" style="--c:var(--s2)"><h4>2. Calling</h4><p>Skills, sector, and market position.</p><span class="w">20% of overall score</span></div>
+    <div class="stage" style="--c:var(--s3)"><h4>3. Credentials</h4><p>Degrees, accreditation, and clearances.</p><span class="w">25% of overall score</span></div>
+    <div class="stage" style="--c:var(--s4)"><h4>4. Contract</h4><p>Offer, Qiwa contract, visa, and entry.</p><span class="w">20% of overall score</span></div>
+    <div class="stage" style="--c:var(--s5)"><h4>5. Compliance</h4><p>Iqama, Absher, renewals, and clean records.</p><span class="w">10% of overall score</span></div>
+    <div class="stage" style="--c:var(--s6)"><h4>6. Commerce</h4><p>Stability, Premium Residency, and legacy.</p><span class="w">15% of overall score</span></div>
+  </div>
+  <div class="warn"><b>Integrity guardrails</b>Never pay anyone for a "free visa" or a fake sponsor. Never work on a visit visa. Never put a business in a Saudi's name to hide your ownership (concealment, called <i>tasattur</i>). In a normal contract your employer pays the Iqama, the work-permit levy, and your health insurance. The app repeats these rules because they protect your family from fines, deportation, and entry bans.</div>
+</section>
+
+<!-- 2 -->
+<section class="chap" id="c2">
+  <h2><span class="cn">2</span>Quick start</h2>
+  <p class="lead">Seven steps take you from opening the file to a printed report. Plan on about 30 minutes for your first pass.</p>
+  <ol class="steps">
+    <li style="--c:var(--s1)"><div><b class="t">Open the file</b>Open <span class="ui">Iqama_Compass.html</span> in a current desktop browser. You will see a green header, a gold banner reading <i>SAMPLE DATA loaded</i>, and a fictional client named Yusuf Rahman.</div></li>
+    <li style="--c:var(--s2)"><div><b class="t">Explore for five minutes</b>Click each tab. Change the pathway on the Timeline tab. Open the Report tab. Nothing you do here affects anyone else.</div></li>
+    <li style="--c:var(--s3)"><div><b class="t">Clear the sample data</b>Click <span class="bm green">Clear Sample Data</span> in the banner or the header. Every personal answer disappears. The built-in reference fees and the 31 template tasks stay.</div></li>
+    <li style="--c:var(--s4)"><div><b class="t">Fill in your Profile, then your household</b>Answer every field you can on the Profile tab. Blank fields count as zero, so your scores rise as you add facts. Then enter your family on the Family tab.</div></li>
+    <li style="--c:var(--s5)"><div><b class="t">Read your results</b>The Profile tab shows your readiness wheel and your biggest gaps. The Pathways tab ranks ten routes. Click <span class="bm line">Plan this route</span> on the one you want.</div></li>
+    <li style="--c:var(--s6)"><div><b class="t">Check the timeline and costs</b>Set a start date on the Timeline tab. Review the Costs tab and edit the landing budget to match real quotes.</div></li>
+    <li style="--c:var(--s1)"><div><b class="t">Work the plan and print</b>Tick tasks on the Action Plan tab. When you are ready, click <span class="bm gold">Print / Save as PDF</span> and save the report.</div></li>
+  </ol>
+
+  <h3>The screen at a glance</h3>
+  <figure>
+    <div class="fig">
+<svg viewBox="0 0 760 430" role="img" aria-label="Diagram of the Iqama Compass screen with six numbered areas" xmlns="http://www.w3.org/2000/svg" font-family="Nunito Sans,system-ui,sans-serif">
+  <rect x="20" y="10" width="720" height="410" rx="14" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
+  <rect x="20" y="10" width="720" height="118" rx="14" fill="var(--hero1)"/>
+  <rect x="20" y="60" width="720" height="68" fill="var(--hero1)"/>
+  <text x="380" y="38" text-anchor="middle" font-size="15" fill="#F7E9BF" font-family="Amiri,serif" direction="rtl">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ</text>
+  <text x="380" y="72" text-anchor="middle" font-size="26" font-weight="700" fill="#fff" font-family="Amiri,Georgia,serif">Iqama <tspan fill="#F2CB62">Compass</tspan></text>
+  <rect x="226" y="88" width="132" height="26" rx="9" fill="#F2CB62"/><text x="292" y="106" text-anchor="middle" font-size="11.5" font-weight="800" fill="#3A2A00">Print / Save as PDF</text>
+  <rect x="366" y="88" width="82" height="26" rx="9" fill="none" stroke="#fff" stroke-opacity=".5"/><text x="407" y="106" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">Clear Sample</text>
+  <rect x="456" y="88" width="82" height="26" rx="9" fill="none" stroke="#fff" stroke-opacity=".5"/><text x="497" y="106" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">Load Sample</text>
+  <rect x="20" y="128" width="720" height="34" fill="var(--gold-soft)"/><line x1="20" y1="162" x2="740" y2="162" stroke="var(--gold)" stroke-width="2"/>
+  <text x="36" y="150" font-size="12" font-weight="800" fill="var(--ink)">SAMPLE DATA loaded.</text><text x="160" y="150" font-size="12" fill="var(--ink)">Every figure you see is an example. Clear it to start with your own.</text>
+  <rect x="660" y="136" width="66" height="20" rx="7" fill="var(--green)"/>
+  <rect x="20" y="162" width="720" height="40" fill="var(--surface)"/><line x1="20" y1="202" x2="740" y2="202" stroke="var(--line)"/>
+  <rect x="32" y="170" width="104" height="24" rx="12" fill="var(--green)"/><text x="84" y="186" text-anchor="middle" font-size="11.5" font-weight="800" fill="var(--on-s)">Strategy Map</text>
+  <text x="170" y="186" font-size="11.5" font-weight="800" fill="var(--muted)">Profile</text><text x="224" y="186" font-size="11.5" font-weight="800" fill="var(--muted)">Pathways</text><text x="292" y="186" font-size="11.5" font-weight="800" fill="var(--muted)">Timeline</text><text x="352" y="186" font-size="11.5" font-weight="800" fill="var(--muted)">Costs</text><text x="400" y="186" font-size="11.5" font-weight="800" fill="var(--muted)">Family</text><text x="452" y="186" font-size="11.5" font-weight="800" fill="var(--muted)">Vision 2030</text><text x="534" y="186" font-size="11.5" font-weight="800" fill="var(--muted)">Action Plan</text><text x="612" y="186" font-size="11.5" font-weight="800" fill="var(--muted)">Background</text><text x="690" y="186" font-size="11.5" font-weight="800" fill="var(--muted)">Report</text>
+  <rect x="40" y="216" width="370" height="136" rx="10" fill="var(--surface2)" stroke="var(--line)"/>
+  <rect x="54" y="230" width="150" height="26" rx="7" fill="var(--surface)" stroke="var(--line)"/><rect x="216" y="230" width="150" height="26" rx="7" fill="var(--surface)" stroke="var(--line)"/>
+  <rect x="54" y="266" width="150" height="26" rx="7" fill="var(--surface)" stroke="var(--line)"/><rect x="216" y="266" width="150" height="26" rx="7" fill="var(--surface)" stroke="var(--line)"/>
+  <rect x="54" y="302" width="312" height="38" rx="7" fill="var(--surface)" stroke="var(--line)"/>
+  <rect x="430" y="216" width="290" height="136" rx="10" fill="var(--surface)" stroke="var(--line)"/>
+  <polygon points="575,236 618,261 618,303 575,328 532,303 532,261" fill="none" stroke="var(--line)"/>
+  <polygon points="575,244 612,264 604,298 575,318 540,300 546,266" fill="var(--green)" fill-opacity=".25" stroke="var(--green)" stroke-width="2"/>
+  <text x="446" y="238" font-size="26" font-weight="700" fill="var(--green)" font-family="Amiri,serif">68</text>
+  <rect x="40" y="366" width="680" height="10" rx="5" fill="var(--surface2)" stroke="var(--line)"/><rect x="40" y="366" width="410" height="10" rx="5" fill="var(--s2)"/>
+  <rect x="20" y="384" width="720" height="36" rx="14" fill="var(--hero1)"/><rect x="20" y="384" width="720" height="14" fill="var(--hero1)"/>
+  <text x="380" y="407" text-anchor="middle" font-size="12" font-weight="700" fill="#F2CB62" font-family="Amiri,serif">Creed-to-Commerce™ · The Balanced Middle Path Academy, LLC</text>
+  <g font-size="12" font-weight="800" fill="#2B2000">
+    <circle cx="560" cy="101" r="11" fill="var(--gold)"/><text x="560" y="105" text-anchor="middle">1</text>
+    <circle cx="640" cy="146" r="11" fill="var(--gold)"/><text x="640" y="150" text-anchor="middle">2</text>
+    <circle cx="20" cy="182" r="11" fill="var(--gold)"/><text x="20" y="186" text-anchor="middle">3</text>
+    <circle cx="40" cy="216" r="11" fill="var(--gold)"/><text x="40" y="220" text-anchor="middle">4</text>
+    <circle cx="720" cy="216" r="11" fill="var(--gold)"/><text x="720" y="220" text-anchor="middle">5</text>
+    <circle cx="730" cy="401" r="11" fill="var(--gold)"/><text x="730" y="405" text-anchor="middle">6</text>
+  </g>
+</svg>
+    </div>
+    <figcaption>A simplified drawing of the Profile screen. Your own screen shows live data.</figcaption>
+  </figure>
+  <div class="legend">
+    <span><b>1</b>Header buttons: print, clear, or reload sample data.</span>
+    <span><b>2</b>Sample banner, visible only while sample data is loaded.</span>
+    <span><b>3</b>Tab rail with ten sections. It stays at the top as you scroll.</span>
+    <span><b>4</b>Your inputs, grouped by topic.</span>
+    <span><b>5</b>Live results that update as you type.</span>
+    <span><b>6</b>Footer with the Creed-to-Commerce™ mark and notice.</span>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="chap" id="c3">
+  <h2><span class="cn">3</span>Installing and opening</h2>
+  <div class="prose">
+    <p>Iqama Compass is one HTML file. There is nothing to install and no account to create. It runs in the browser on your computer, tablet, or phone.</p>
+    <h3>Option A: open the file on your computer</h3>
+    <ol>
+      <li>Save <span class="ui">Iqama_Compass.html</span> to a folder you will remember.</li>
+      <li>Double-click it, or drag it into Chrome, Edge, Safari, or Firefox.</li>
+      <li>Bookmark it. Your answers stay with that browser and that file location.</li>
+    </ol>
+    <div class="note"><b>Use the same file location each time</b>Browsers tie saved answers to the address of the page. If you move the file, or open a copy from a different folder or website, you may see an empty app. Keep one master copy and bookmark it.</div>
+    <h3>Option B: host it for clients (GitHub to Vercel)</h3>
+    <p>This matches the way you publish other BMPA apps.</p>
+    <ol>
+      <li>Create a GitHub repository, for example <span class="ui">iqama-compass</span>.</li>
+      <li>Add the file and rename it <span class="ui">index.html</span> so it loads at the site root.</li>
+      <li>In Vercel, import the repository and deploy. No build command or framework is needed.</li>
+      <li>Share the Vercel address. Each visitor's answers stay in their own browser and never reach your server.</li>
+    </ol>
+    <div class="tip"><b>Updating the app later</b>When a fee or rule changes, edit the file, commit it, and Vercel redeploys. Visitors keep their saved answers because the page address does not change.</div>
+    <h3>Requirements</h3>
+    <ul>
+      <li>A current version of Chrome, Edge, Safari, or Firefox.</li>
+      <li>An internet connection the first time, to load the two typefaces (Amiri and Nunito Sans). Offline, the app falls back to Georgia and your system font, and everything still works.</li>
+      <li>A desktop browser for the best printing. Phones can use every tab, but printing options vary by device.</li>
+    </ul>
+    <div class="warn"><b>Printing does not work in embedded previews</b>Chat windows, file previews, and some email viewers block the print dialog. If Print / Save as PDF does nothing, open the file directly in a browser tab.</div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="chap" id="c4">
+  <h2><span class="cn">4</span>Your data and privacy</h2>
+  <div class="prose">
+    <h3>Sample data versus your data</h3>
+    <p>The first time you open the app it loads a fictional client, Yusuf Rahman, so you can see every screen working. The gold banner and the words <i>SAMPLE DATA</i> on the report cover mark it clearly. Once you clear it, the banner disappears and the app treats everything as yours.</p>
+  </div>
+  <div class="tablewrap"><table>
+    <caption>The three header buttons</caption>
+    <thead><tr><th>Button</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td><span class="bm gold">Print / Save as PDF</span></td><td>Jumps to the Report tab and opens your browser's print dialog. See Chapter 7.</td></tr>
+      <tr><td><span class="bm ghost">Clear Sample Data</span></td><td>While sample data is loaded, empties every personal answer in one click. After you have your own data, the same button reads <b>Erase My Data</b> and needs two clicks (see below).</td></tr>
+      <tr><td><span class="bm ghost">Load Sample Data</span></td><td>Brings back the fictional client. If you have your own data, the first click changes the label to <i>Click again to replace my data</i>. A second click within four seconds replaces your answers with the sample.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid2">
+    <div class="kbox"><h4>What clearing removes</h4><ul>
+      <li>Every Profile answer and check box</li>
+      <li>Your household on the Family tab</li>
+      <li>Selected Vision 2030 contributions</li>
+      <li>The chosen pathway, start date, and cost horizon</li>
+      <li>Task ticks, due dates, and custom tasks (the template list returns, unticked)</li>
+      <li>Notes</li>
+      <li>Landing-budget figures (reset to the starting estimates)</li>
+    </ul></div>
+    <div class="kbox"><h4>What clearing keeps</h4><ul>
+      <li>The <b>Prepared by</b> name on the Report tab</li>
+      <li>The built-in reference fees, thresholds, and rules</li>
+      <li>The 31 template tasks</li>
+      <li>The ten pathway descriptions and the Background tab</li>
+    </ul></div>
+  </div>
+  <div class="prose">
+    <h3>Where your answers are saved</h3>
+    <p>The app saves automatically after every change, inside your browser's own storage (local storage). Nothing is sent over the internet. The consequences are practical:</p>
+    <ul>
+      <li>Answers appear only in the same browser, on the same device, at the same page address.</li>
+      <li>A private or incognito window starts empty and forgets everything when closed.</li>
+      <li>Clearing your browser's site data deletes your answers. There is no recovery.</li>
+      <li>There is no export file. To keep a record, print the report to PDF (Chapter 7).</li>
+    </ul>
+    <div class="warn"><b>Shared or public computers</b>Click <span class="bm danger">Erase My Data</span> before you leave, then click it again within four seconds to confirm. The two-click step prevents accidents.</div>
+    <h3>Working with more than one client</h3>
+    <p>The app holds one profile at a time. A coach has three safe options:</p>
+    <ol>
+      <li>Print the PDF at the end of each session, then erase and start the next client.</li>
+      <li>Give each client a separate browser profile (for example, a Chrome profile per client).</li>
+      <li>Let clients use their own copy on their own device, with you reviewing their printed report.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="chap pb" id="c5">
+  <h2><span class="cn">5</span>Tab-by-tab guide</h2>
+  <p class="lead">The ten tabs follow the order of a real plan: see the whole journey, describe yourself, compare routes, schedule and price one, bring your family, justify it to Vision 2030, track the work, and print.</p>
+
+  <h3><span class="dot" style="--c:var(--s1)"></span>5.1 Strategy Map</h3>
+  <p><b>Purpose:</b> one page that shows the whole climb from first intention to a long-standing Iqama.</p>
+  <ul>
+    <li><b>Six Creed-to-Commerce™ stages.</b> Each card shows its purpose and typical timing. After you enter a profile, each card also shows your score for that stage.</li>
+    <li><b>The Residency Staircase.</b> Five steps: qualify and enter, sponsored Iqama, established professional, Premium Residency, and long-standing status. A gold <i>YOU ARE HERE</i> tag marks your step. It comes from <b>Where you are now</b> on the Profile tab (planning or offer in hand marks step 1, first year in Saudi marks step 2, over a year marks step 3, Premium holder marks step 4).</li>
+    <li><b>Branch chips.</b> The Premium routes that enter directly at steps 4 and 5.</li>
+    <li><b>Lane boxes.</b> Your two best routes for Lane A (get in) and Lane B (make it last), with fit scores. Empty until you enter a profile.</li>
+    <li><b>Integrity guardrails.</b> The red box lists the shortcuts to refuse.</li>
+  </ul>
+
+  <h3><span class="dot" style="--c:var(--s2)"></span>5.2 Profile</h3>
+  <p><b>Purpose:</b> capture your facts once. Every other tab reads from here. Results on the right update as you type.</p>
+  <div class="tablewrap"><table>
+    <caption>Profile fields and where each one is used</caption>
+    <thead><tr><th>Field</th><th>What to enter</th><th>Where it matters</th></tr></thead>
+    <tbody>
+      <tr><td>Full name, Nationality or passport</td><td>As shown on your passport.</td><td>Report cover and snapshot.</td></tr>
+      <tr><td>Passport region</td><td>Closest match from the list.</td><td>Recorded for your own reference. It does not change any score in this edition.</td></tr>
+      <tr><td>Age</td><td>Years, 18 to 85.</td><td>Premium Annual fit is zero under 21. Shown in the report.</td></tr>
+      <tr><td>Where you are now</td><td>Planning, offer in hand, first year in Saudi, over a year, or Premium holder.</td><td>Position of the YOU ARE HERE tag.</td></tr>
+      <tr><td>Highest degree</td><td>Secondary, diploma, bachelor's, master's, or doctorate.</td><td>Skill band, Credentials score, several route fits.</td></tr>
+      <tr><td>Field or profession</td><td>Your discipline in a few words.</td><td>Report snapshot.</td></tr>
+      <tr><td>Years of experience</td><td>Relevant years only.</td><td>Calling score (full credit at 12 years), skill band, priority-sector fit.</td></tr>
+      <tr><td>Seniority</td><td>Individual contributor, manager, director or VP, C-suite or owner.</td><td>Skill band, Regional HQ, Executive Talent, and Founder fit.</td></tr>
+      <tr><td>English and Arabic level</td><td>Your honest level.</td><td>Calling score and Regional HQ fit.</td></tr>
+      <tr><td>Target sector</td><td>One of 15 sectors.</td><td>Calling score, route fits, and the highlighted row on the Vision 2030 tab.</td></tr>
+      <tr><td>Regulated profession? / Accreditation</td><td>Yes for health, engineering, accounting, law and similar. Then choose Completed, In progress, or Not started.</td><td>Credentials score, Private sponsor and Public route fit, Healthcare Talent track.</td></tr>
+      <tr><td>Job-search status</td><td>No leads, applying, interviewing, offer received, or contract signed.</td><td>Contract score and Private sponsor fit.</td></tr>
+      <tr><td>Salary (SAR per month)</td><td>Offered or target, in Saudi riyals.</td><td>Contract score, skill band, family salary test, Talent thresholds, Commerce score.</td></tr>
+      <tr><td>Plan to launch or fund a Saudi company?</td><td>Yes or No.</td><td>Commerce score and Founder fit.</td></tr>
+      <tr><td>Liquid savings, Other investable capital</td><td>Riyals. Add the two for total capital.</td><td>Runway, capital tiers, and the Annual, Permanent, Real estate, and Founder fits.</td></tr>
+      <tr><td>Planned stay (years)</td><td>Your horizon.</td><td>Creed score and the Annual, Permanent, and Founder fits.</td></tr>
+      <tr><td>Purpose statement</td><td>Why this move, why now, and whom it serves. Write at least 40 characters.</td><td>Creed score and the report.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tablewrap"><table>
+    <caption>The nine readiness check boxes</caption>
+    <thead><tr><th>Check box</th><th>Stage</th><th class="r">Points</th></tr></thead>
+    <tbody>
+      <tr><td>My family has agreed to the plan</td><td>Creed</td><td class="r num">20</td></tr>
+      <tr><td>Degree attested through the home, Saudi embassy, and MOFA chain</td><td>Credentials</td><td class="r num">20</td></tr>
+      <tr><td>Police clearance obtained</td><td>Credentials</td><td class="r num">15</td></tr>
+      <tr><td>Medically fit and a medical exam is ready</td><td>Credentials</td><td class="r num">10</td></tr>
+      <tr><td>Passport valid for at least 6 months</td><td>Credentials</td><td class="r num">10</td></tr>
+      <tr><td>No criminal record</td><td>Compliance</td><td class="r num">30</td></tr>
+      <tr><td>No prior ban, overstay, or unpaid Saudi fines</td><td>Compliance</td><td class="r num">25</td></tr>
+      <tr><td>I understand Qiwa, profession match, the 90-day window, and renewals</td><td>Compliance</td><td class="r num">25</td></tr>
+      <tr><td>I sign the integrity pledge</td><td>Compliance</td><td class="r num">20</td></tr>
+    </tbody>
+  </table></div>
+  <h4>Reading the results panel</h4>
+  <ul>
+    <li><b>Overall score and band.</b> 75 or more is Launch-ready, 55 to 74 Nearly ready, 35 to 54 Build phase, and below 35 Foundation phase.</li>
+    <li><b>Likely skill band.</b> A coaching estimate of High-Skill, Skilled, or Basic, modeled on the factors the skills-based work-permit system weighs. Employers' real classification can differ.</li>
+    <li><b>Readiness wheel.</b> Six spokes, one per stage, scaled 0 to 100. A lopsided wheel shows where to work.</li>
+    <li><b>Biggest gaps.</b> Up to six specific actions, ordered from your weakest stage upward.</li>
+  </ul>
+  <div class="tip"><b>Enter honest numbers</b>The app rewards facts, not optimism. A degree that is not yet attested should stay unchecked, because attestation is often the longest step in the whole plan.</div>
+
+  <h3><span class="dot" style="--c:var(--s3)"></span>5.3 Pathways</h3>
+  <p><b>Purpose:</b> compare ten work-based routes and pick one to plan.</p>
+  <ul>
+    <li><b>Fit ranking.</b> Every route scored 0 to 100 with a colored bar. Scores show zero until you enter a profile.</li>
+    <li><b>Lanes.</b> <i>Lane A: Enter</i> routes get you your first work Iqama. <i>Lane B: Anchor</i> routes make residency durable and less dependent on one employer. <i>Lane C: Family</i> widens it to your household.</li>
+    <li><b>Route cards.</b> Each card gives a summary, <i>Longevity</i> and <i>Sponsor independence</i> ratings (one to five bars), who pays, the cost to hold the status, the official channel, step-by-step instructions, and watch-outs. Open the two folding sections to read them.</li>
+    <li><b>Track pill.</b> On Premium Talent, a pill names the track you come closest to: Healthcare, Science and Research, or Executive.</li>
+    <li><b>Plan this route.</b> Sets the pathway and takes you to the Timeline tab.</li>
+  </ul>
+  <div class="note"><b>Fit is a coaching index</b>It combines published thresholds with coaching judgment. A low fit tells you what to build, not that you are barred. A high fit does not promise approval.</div>
+
+  <h3><span class="dot" style="--c:var(--s4)"></span>5.4 Timeline</h3>
+  <p><b>Purpose:</b> turn a route into dates.</p>
+  <ol>
+    <li>Pick a pathway (or arrive here through <i>Plan this route</i>).</li>
+    <li>Choose a start date. If you leave it blank the app uses today.</li>
+    <li>Read the four tiles: best-case finish, likely finish, slow-case finish, and the number of phases.</li>
+  </ol>
+  <ul>
+    <li>Each row shows <b>minimum / likely / maximum weeks</b> and the dates the likely span covers. The solid bar is the likely duration and the faint line extending from it is the slow case. The month axis runs along the top.</li>
+    <li>The app places phases one after another. That is cautious, because some real steps overlap, such as clearances while you attest degrees.</li>
+    <li>The <b>ten-year horizon</b> table at the bottom links the first Iqama to later milestones: Year 0, Year 1, Years 2 to 4, Years 3 to 7, and Year 5 onward.</li>
+  </ul>
+
+  <h3><span class="dot" style="--c:var(--s5)"></span>5.5 Costs</h3>
+  <p><b>Purpose:</b> show what it costs to arrive, to stay, and to become permanent.</p>
+  <ul>
+    <li><b>Four tiles.</b> Landing capital needed, sponsored fees per year for your household, Premium Annual (SAR 100,000 a year), and Premium Permanent (SAR 800,000 once). Each shows the dollar equivalent at SAR 3.75.</li>
+    <li><b>Cumulative chart.</b> Three lines over 5, 10, 15, or 20 years: sponsored fees, Annual, and Permanent. Use the <b>Horizon</b> menu to change the span. A dashed marker at year 8 shows where Annual overtakes the one-time Permanent fee. Real estate is left out because the money stays in the property.</li>
+    <li><b>Insight boxes.</b> Plain-language readings of your numbers, including how many years of sponsored fees equal the Permanent fee and how much of the landing capital your savings cover.</li>
+    <li><b>Landing budget.</b> Eight editable figures: degree attestation, police clearance, medical exam, flights and relocation, housing deposit, accreditation, family documents, and the family visa fee. Overtype any figure with a real quote. Totals and runway months update below.</li>
+  </ul>
+  <div class="note"><b>What you can and cannot edit</b>You can edit the eight landing-budget figures here and the insurance amount per dependent on the Family tab. The statutory rates (for example the SAR 800 monthly levy, the SAR 400 monthly dependent fee, and the Premium fees) are built into the calculations. If a rule changes, update the file before relying on the totals.</div>
+
+  <h3><span class="dot" style="--c:var(--s6)"></span>5.6 Family</h3>
+  <p><b>Purpose:</b> test who can be sponsored, price the first two years, and check the household budget.</p>
+  <div class="tablewrap"><table>
+    <caption>Family fields</caption>
+    <thead><tr><th>Field</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Spouse to sponsor / Will your spouse work?</td><td>One spouse. The second answer drives the Spouse bridge fit on the Pathways tab.</td></tr>
+      <tr><td>Sons under 18, Sons 18 or older</td><td>Only sons under 18 count as sponsorable dependents in the cited guidance. Older sons need their own contract or a visit visa.</td></tr>
+      <tr><td>Unmarried daughters</td><td>Any age while unmarried.</td></tr>
+      <tr><td>Parents</td><td>Not sponsorable. They travel on family visit visas.</td></tr>
+      <tr><td>Schooling (SAR a year, all children)</td><td>Total tuition for all children.</td></tr>
+      <tr><td>Housing, Other living costs (SAR a month)</td><td>Rent and everything else.</td></tr>
+      <tr><td>Health insurance per dependent (SAR a year)</td><td>Starts at SAR 1,500. Reported range is SAR 500 to 2,000 or more.</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li><b>Eligibility table.</b> Marks each member Eligible or Different route, with a note.</li>
+    <li><b>Salary test.</b> Passes at SAR 3,500 a month or more, the commonly cited family-sponsorship minimum.</li>
+    <li><b>Four tiles.</b> Eligible dependents, year-1 family cost, year-2 and later cost, and household cost per month.</li>
+    <li><b>Affordability gauge.</b> Salary minus household cost, shown as a monthly surplus and as a percent of salary. A buffer of 20% or more is Healthy, 0 to 19% is Thin, and below zero is a Shortfall.</li>
+    <li><b>Family timeline.</b> Typical durations from document attestation to the family's Iqama.</li>
+  </ul>
+
+  <h3><span class="dot" style="--c:var(--s1)"></span>5.7 Vision 2030</h3>
+  <p><b>Purpose:</b> show how your move serves the Kingdom's goals and help you say so in applications.</p>
+  <ul>
+    <li><b>Fact tiles and pillars.</b> Reported progress figures and the three pillars: a Vibrant Society, a Thriving Economy, an Ambitious Nation.</li>
+    <li><b>Programs and quotas.</b> Eight Vision Realization Programs you can serve, and the reported Saudization quotas by sector.</li>
+    <li><b>Sector alignment guide.</b> All 15 sectors with priority status, Saudization pressure, and guidance. Your target sector is highlighted in gold. Pressure labels are coaching judgments, not official statistics.</li>
+    <li><b>Value statement builder.</b> Tick the contributions that fit you (there are 15). The app writes a paragraph that names your sector and groups your contributions by pillar. Copy it into cover letters, endorsement requests, and Premium Residency applications.</li>
+  </ul>
+
+  <h3><span class="dot" style="--c:var(--s2)"></span>5.8 Action Plan</h3>
+  <p><b>Purpose:</b> turn the plan into work you can tick off.</p>
+  <ul>
+    <li>Six columns, one per stage, hold the 31 template tasks. Each column shows a count such as 3/5.</li>
+    <li>Tick the box to complete a task. Pick a due date under the task. Click the cross to delete a task.</li>
+    <li><b>Add your own task:</b> choose a stage, type a name, optionally add a due date, and click <span class="bm green">Add task</span>.</li>
+    <li><span class="bm danger">Delete all tasks</span> empties the board. <span class="bm line">Restore template tasks</span> brings back the original 31, unticked, and removes any custom tasks.</li>
+    <li>The <b>notes</b> box at the bottom prints in the report. Use it for coach observations, deadlines, and decisions.</li>
+  </ul>
+
+  <h3><span class="dot" style="--c:var(--s3)"></span>5.9 Background</h3>
+  <p>The reference chapter inside the app. It explains why the app exists, who it serves, the key fees and timelines, the Vision 2030 data, the demographic qualifications that matter, how scoring works, and the sources consulted. Read it before client sessions.</p>
+
+  <h3><span class="dot" style="--c:var(--s4)"></span>5.10 Report</h3>
+  <p>A paper-style preview of the printable report. Set <b>Prepared by</b> (your name or firm), click <span class="bm green">Print / Save as PDF</span>, or click <span class="bm line">Copy summary text</span> to paste a short plain-text summary into an email or CRM. Chapter 7 covers it in detail.</p>
+</section>
+
+<!-- 6 -->
+<section class="chap pb" id="c6">
+  <h2><span class="cn">6</span>How the numbers work</h2>
+  <p class="lead">Every number in the app comes from a rule you can read here. Scores are coaching indexes, not official decisions. Use this chapter when a client asks why a score is what it is.</p>
+
+  <h3>6.1 Readiness: six stage scores and one overall score</h3>
+  <p>Each stage scores 0 to 100 from the inputs below. The overall score is the weighted average, rounded.</p>
+  <div style="display:grid;gap:8px;max-width:620px">
+    <div class="wbar" style="--c:var(--s1)"><b>Creed</b><i><s style="width:10%"></s></i><span class="num">10%</span></div>
+    <div class="wbar" style="--c:var(--s2)"><b>Calling</b><i><s style="width:20%"></s></i><span class="num">20%</span></div>
+    <div class="wbar" style="--c:var(--s3)"><b>Credentials</b><i><s style="width:25%"></s></i><span class="num">25%</span></div>
+    <div class="wbar" style="--c:var(--s4)"><b>Contract</b><i><s style="width:20%"></s></i><span class="num">20%</span></div>
+    <div class="wbar" style="--c:var(--s5)"><b>Compliance</b><i><s style="width:10%"></s></i><span class="num">10%</span></div>
+    <div class="wbar" style="--c:var(--s6)"><b>Commerce</b><i><s style="width:15%"></s></i><span class="num">15%</span></div>
+  </div>
+  <div class="tablewrap"><table>
+    <caption>Point rules for each stage (each stage totals 100)</caption>
+    <thead><tr><th>Stage</th><th>How the points are earned</th></tr></thead>
+    <tbody>
+      <tr><td><span class="dot" style="--c:var(--s1)"></span><b>Creed</b></td><td>Purpose statement: 35 points at 40 or more characters, 20 at 15 or more. Planned stay: 25 points at 3 years or more, 12 for any shorter stay. Family agreed: 20. A pathway chosen on the Timeline tab: 20.</td></tr>
+      <tr><td><span class="dot" style="--c:var(--s2)"></span><b>Calling</b></td><td>Experience: up to 35 points (years divided by 12, capped at 12 years). Skill band: High-Skill 25, Skilled 15, Basic 5. Target sector: 20 for a Vision priority sector, 8 for another sector. English: basic 3, professional 6, fluent 10. Arabic: none 0, basic 4, conversational 10.</td></tr>
+      <tr><td><span class="dot" style="--c:var(--s3)"></span><b>Credentials</b></td><td>Degree: secondary 0, diploma 8, bachelor's 16, master's 22, doctorate 25. Degree attested 20. Police clearance 15. Passport valid 10. Medical ready 10. Accreditation: if regulated, Completed 20, In progress 10, Not started 0; if not regulated, 20; if unsure, 10.</td></tr>
+      <tr><td><span class="dot" style="--c:var(--s4)"></span><b>Contract</b></td><td>Job-search status counts for up to 60 points: no leads 0, applying 12, interviewing 27, offer received 45, contract signed 60. Salary adds up to 40: SAR 3,500 or more 10, 7,000 or more 20, 14,000 or more 30, 30,000 or more 35, 80,000 or more 40.</td></tr>
+      <tr><td><span class="dot" style="--c:var(--s5)"></span><b>Compliance</b></td><td>No criminal record 30. No prior ban or unpaid fines 25. Understands the rules 25. Integrity pledge 20.</td></tr>
+      <tr><td><span class="dot" style="--c:var(--s6)"></span><b>Commerce</b></td><td>Runway: up to 30 points (months of savings at your household cost divided by 6, capped at 6 months; SAR 10,000 a month is assumed if no household costs are entered). Total capital (savings plus other capital): SAR 100,000 or more 10, 500,000 or more 20, 800,000 or more 30, 4,000,000 or more 40. Salary: SAR 7,000 or more 8, 14,000 or more 15. Plans a Saudi company: 15.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tablewrap"><table>
+    <caption>Readiness bands</caption>
+    <thead><tr><th>Overall score</th><th>Band</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td class="num">75 to 100</td><td><span class="pill good">Launch-ready</span></td><td>Move to applications and contracts.</td></tr>
+      <tr><td class="num">55 to 74</td><td><span class="pill gold">Nearly ready</span></td><td>Close two or three named gaps first.</td></tr>
+      <tr><td class="num">35 to 54</td><td><span class="pill warn">Build phase</span></td><td>Invest months in credentials and market position.</td></tr>
+      <tr><td class="num">0 to 34</td><td><span class="pill bad">Foundation phase</span></td><td>Start with purpose, documents, and a realistic route.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><b>Likely skill band</b>Points for education (0 to 4), experience (10 years or more 3, 5 or more 2, 2 or more 1), salary (SAR 15,000 or more 3, 7,000 or more 2, 3,500 or more 1), and seniority (manager 1, director 2, C-suite 3). Nine or more points reads High-Skill, four to eight Skilled, and fewer Basic. It imitates the factors the skills-based work-permit system weighs and is not the official result.</div>
+
+  <h3>6.2 Pathway fit scores</h3>
+  <p>Each route starts from a base score and gains or loses points. Results are limited to 0 through 100. If the profile is empty every route scores 0.</p>
+  <div class="tablewrap"><table>
+    <caption>Fit rules by route</caption>
+    <thead><tr><th>Route</th><th>Rule</th></tr></thead>
+    <tbody>
+      <tr><td>Private sponsor</td><td>Base 55. Plus 15 if interviewing, offer received, or signed. Plus 15 if your Credentials score is 60 or more. Plus 10 for High-Skill or 5 for Skilled. Minus 15 if your profession is regulated and not yet accredited.</td></tr>
+      <tr><td>Public and institutional</td><td>Base 30. Plus 30 if regulated and accredited. Plus 15 for a master's or doctorate. Plus 25 for a healthcare or education sector.</td></tr>
+      <tr><td>Regional HQ talent</td><td>Base 25. Plus 30 for director or C-suite. Plus 20 for High-Skill. Plus 10 for professional or fluent English. Plus 10 for finance, technology, or logistics.</td></tr>
+      <tr><td>Priority sector</td><td>Base 35. Plus 30 for a Vision priority sector. Plus 15 for five or more years. Plus 10 for Skilled or High-Skill.</td></tr>
+      <tr><td>Founder and investor</td><td>Base 10. Plus 40 if you plan a Saudi company. Plus 25 for capital of SAR 500,000 or more (10 for SAR 100,000 or more). Plus 10 for a stay of 5 years or more. Plus 10 for C-suite or owner.</td></tr>
+      <tr><td>Premium Talent</td><td>Floor 10, or the best track. Healthcare 85 if your sector is healthcare, you are accredited, and hold a master's or more (30 if healthcare without those). Science and Research 80 with a doctorate, salary of SAR 14,000 or more, and an education sector (55 in another sector). Executive 85 for C-suite at SAR 80,000 or more (35 for director at SAR 50,000 or more).</td></tr>
+      <tr><td>Premium Annual</td><td>Zero if under 21. Otherwise 70 for capital of SAR 300,000 or more, 40 for SAR 100,000 or more, else 5. Plus 10 for a stay of 3 to 7 years.</td></tr>
+      <tr><td>Premium Permanent</td><td>85 for capital of SAR 1,200,000 or more, 60 for SAR 800,000 or more, else 3. Plus 10 for a stay of 8 years or more.</td></tr>
+      <tr><td>Premium Real estate</td><td>80 for capital of SAR 4,000,000 or more, 20 for SAR 2,000,000 or more, else 2.</td></tr>
+      <tr><td>Spouse bridge</td><td>Zero without a spouse. With a spouse: plans to work 75, possibly 55, no 25.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="muted small">Fit bands used for colors: 70 or more green, 40 to 69 amber, below 40 red.</p>
+
+  <h3>6.3 Cost formulas</h3>
+  <ul>
+    <li><b>Eligible dependents</b> = spouse (1 if Yes) + sons under 18 + unmarried daughters.</li>
+    <li><b>Sponsored fees per year</b> = SAR 650 (Iqama) + SAR 9,600 (work-permit levy, SAR 800 a month) + SAR 4,800 for each eligible dependent (SAR 400 a month).</li>
+    <li><b>Dependent fees in year 1</b> = dependents × SAR 400 × 9 months, because new arrivals are reported exempt for the first 90 days.</li>
+    <li><b>Family year 1</b> = year-1 dependent fees + insurance + family visa fee + family document costs (the last two apply only if you have eligible dependents).</li>
+    <li><b>Household per month</b> = housing + other costs + schooling ÷ 12 + (annual dependent fees + insurance) ÷ 12.</li>
+    <li><b>Landing capital</b> = the six arrival items (attestation, police clearance, medical, flights, housing deposit, accreditation) + family year 1.</li>
+    <li><b>Premium Annual</b> = SAR 100,000 for each year. <b>Permanent</b> = SAR 800,000 once. At eight years Annual equals the Permanent fee, and after that it costs more.</li>
+    <li><b>Dollar figures</b> divide riyals by 3.75.</li>
+  </ul>
+
+  <h3>6.4 Timeline totals by route</h3>
+  <p>Weeks are added phase by phase. Minimum, likely, and maximum are coaching ranges drawn from 2026 guidance and older forum reports, not official processing times.</p>
+  <div class="tablewrap"><table>
+    <caption>Total duration if phases run in sequence</caption>
+    <thead><tr><th>Route</th><th>Lane</th><th class="r">Phases</th><th class="r">Best</th><th class="r">Likely</th><th class="r">Slow</th><th class="r">Likely in months</th></tr></thead>
+    <tbody><tr><td><b>Private-Sector Employer Sponsorship</b></td><td>A</td><td class="r num">10</td><td class="r num">22 wks</td><td class="r num">43 wks</td><td class="r num">82 wks</td><td class="r num">9.9</td></tr><tr><td><b>Government, University, and Hospital Contracts</b></td><td>A</td><td class="r num">9</td><td class="r num">33 wks</td><td class="r num">66 wks</td><td class="r num">124 wks</td><td class="r num">15.2</td></tr><tr><td><b>Regional HQ and Multinational Talent</b></td><td>A</td><td class="r num">9</td><td class="r num">25 wks</td><td class="r num">47 wks</td><td class="r num">88 wks</td><td class="r num">10.8</td></tr><tr><td><b>Priority-Sector and Giga-Project Hire</b></td><td>A</td><td class="r num">9</td><td class="r num">22 wks</td><td class="r num">43 wks</td><td class="r num">84 wks</td><td class="r num">9.9</td></tr><tr><td><b>Founder and Investor Residency</b></td><td>B</td><td class="r num">7</td><td class="r num">23 wks</td><td class="r num">46 wks</td><td class="r num">88 wks</td><td class="r num">10.6</td></tr><tr><td><b>Premium Residency: Special Talent</b></td><td>B</td><td class="r num">5</td><td class="r num">18 wks</td><td class="r num">35 wks</td><td class="r num">61 wks</td><td class="r num">8.1</td></tr><tr><td><b>Premium Residency: Annual</b></td><td>B</td><td class="r num">5</td><td class="r num">11 wks</td><td class="r num">21 wks</td><td class="r num">45 wks</td><td class="r num">4.8</td></tr><tr><td><b>Premium Residency: Permanent</b></td><td>B</td><td class="r num">5</td><td class="r num">16 wks</td><td class="r num">41 wks</td><td class="r num">75 wks</td><td class="r num">9.4</td></tr><tr><td><b>Premium Residency: Real-Estate Owner</b></td><td>B</td><td class="r num">5</td><td class="r num">17 wks</td><td class="r num">33 wks</td><td class="r num">53 wks</td><td class="r num">7.6</td></tr><tr><td><b>Dependent-to-Worker Bridge</b></td><td>C</td><td class="r num">4</td><td class="r num">11 wks</td><td class="r num">22 wks</td><td class="r num">44 wks</td><td class="r num">5.1</td></tr></tbody>
+  </table></div>
+</section>
+
+<!-- 7 -->
+<section class="chap" id="c7">
+  <h2><span class="cn">7</span>Printing the report</h2>
+  <p class="lead">The report is a branded A4 document built from your answers. Print it to PDF to keep it, email it, or hand it to a client.</p>
+  <h3>7.1 Steps</h3>
+  <ol class="steps">
+    <li style="--c:var(--s1)"><div><b class="t">Finish your entries</b>Fill the Profile and Family tabs, choose a pathway and start date, and tick your tasks. Add notes for the client.</div></li>
+    <li style="--c:var(--s2)"><div><b class="t">Set Prepared by</b>Open the Report tab and type your name or firm. It prints on the cover. The default is The Balanced Middle Path Academy, LLC.</div></li>
+    <li style="--c:var(--s3)"><div><b class="t">Click Print / Save as PDF</b>Use the gold button in the header or the green button on the Report tab. The app opens the Report tab and then your print dialog.</div></li>
+    <li style="--c:var(--s4)"><div><b class="t">Choose the print settings</b>Destination <i>Save as PDF</i>, paper <i>A4</i> (or Letter), margins <i>Default</i>, scale <i>100%</i>, and turn <i>Background graphics</i> on so the colors print.</div></li>
+    <li style="--c:var(--s5)"><div><b class="t">Save</b>The suggested file name is <i>Iqama Compass Report - Client Name</i>.</div></li>
+  </ol>
+  <div class="tablewrap"><table>
+    <caption>Print dialog notes by browser</caption>
+    <thead><tr><th>Browser</th><th>Where the setting is</th></tr></thead>
+    <tbody>
+      <tr><td>Chrome and Edge</td><td>Print window, <i>More settings</i>, tick <i>Background graphics</i>. Untick <i>Headers and footers</i> for a cleaner page.</td></tr>
+      <tr><td>Firefox</td><td>Print window, <i>More settings</i>, tick <i>Print backgrounds</i>.</td></tr>
+      <tr><td>Safari</td><td>File, Print, then check <i>Print backgrounds</i> in the options and choose PDF, <i>Save as PDF</i>.</td></tr>
+      <tr><td>Phones and tablets</td><td>Use the share or print option in the browser menu and choose <i>Save as PDF</i>. Layout can vary, so check the result.</td></tr>
+    </tbody>
+  </table></div>
+  <h3>7.2 What the report contains</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Part</th><th>Contents</th></tr></thead>
+    <tbody>
+      <tr><td>Cover</td><td>Basmala, title, client name, date, prepared by. A red SAMPLE DATA watermark appears if sample data is loaded.</td></tr>
+      <tr><td>1. Executive summary</td><td>Readiness score and band, best entry route, best anchor route, likely finish of your chosen route, and a short written conclusion with the most important gap.</td></tr>
+      <tr><td>2. Profile snapshot</td><td>Your answers as a table, plus the purpose statement.</td></tr>
+      <tr><td>3. Readiness</td><td>The wheel, six stage bars, and the gaps to close first.</td></tr>
+      <tr><td>4. Pathway ranking</td><td>All ten routes with lane, fit, and official channel.</td></tr>
+      <tr><td>5. Timeline</td><td>Best, likely, and slow dates, plus the phase chart. Starts on a new page. Appears only when a pathway is chosen.</td></tr>
+      <tr><td>6. Costs</td><td>Tiles, the cumulative chart, and the landing-budget table.</td></tr>
+      <tr><td>7. Family plan</td><td>Eligible dependents, year-1 and year-2 costs, monthly cost and surplus, and the salary test.</td></tr>
+      <tr><td>8. Vision 2030 alignment</td><td>Your value statement and your sector's guidance.</td></tr>
+      <tr><td>9. Action plan</td><td>Every task with a check mark and due date, grouped by stage. Starts on a new page.</td></tr>
+      <tr><td>10. Notes</td><td>Appears only if you typed notes.</td></tr>
+      <tr><td>Important notice</td><td>The disclaimer and verification sources. Always printed.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="muted small">With the sample client the report runs about nine pages. With empty data it runs about three.</p>
+  <h3>7.3 Copy summary text</h3>
+  <p>The <span class="bm line">Copy summary text</span> button places a short plain-text summary on your clipboard: client name, overall score, six stage scores, best entry and anchor routes, selected route with likely finish date, landing capital, and eligible dependents. Paste it into an email, a note, or your CRM card.</p>
+  <div class="tip"><b>If copy fails</b>Some browsers block clipboard access in certain windows. Open the file in a normal browser tab and try again.</div>
+</section>
+
+<!-- 8 -->
+<section class="chap pb" id="c8">
+  <h2><span class="cn">8</span>Coaching workflows</h2>
+  <p class="lead">These workflows show how a coach or consultant can run the app with a client. They follow the six Creed-to-Commerce™ stages.</p>
+  <h3>8.1 A 90-minute intake session</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Minutes</th><th>Stage</th><th>What to do</th></tr></thead>
+    <tbody>
+      <tr><td class="num">0 to 15</td><td><span class="dot" style="--c:var(--s1)"></span>Creed</td><td>Ask why the move, why now, and whom it serves. Have the client type the answer into the purpose box. Confirm the family has agreed.</td></tr>
+      <tr><td class="num">15 to 40</td><td><span class="dot" style="--c:var(--s2)"></span>Calling and <span class="dot" style="--c:var(--s3)"></span>Credentials</td><td>Complete the Profile tab together. Be strict with the check boxes. Mark degrees as attested only when the chain is complete.</td></tr>
+      <tr><td class="num">40 to 60</td><td>Results</td><td>Read the wheel and the gaps. Open Pathways and discuss the top three routes in each lane.</td></tr>
+      <tr><td class="num">60 to 75</td><td><span class="dot" style="--c:var(--s4)"></span>Contract</td><td>Choose a route with Plan this route. Set a realistic start date and read the best, likely, and slow finishes aloud.</td></tr>
+      <tr><td class="num">75 to 85</td><td><span class="dot" style="--c:var(--s5)"></span>Compliance and <span class="dot" style="--c:var(--s6)"></span>Commerce</td><td>Fill the Family tab, review landing capital on the Costs tab, and test the household buffer.</td></tr>
+      <tr><td class="num">85 to 90</td><td>Close</td><td>Assign three tasks with due dates. Print the report, or save it for the client to read before the next session.</td></tr>
+    </tbody>
+  </table></div>
+  <h3>8.2 Self-guided rhythm for an individual</h3>
+  <ul>
+    <li><b>Week 1:</b> clear the sample, finish Profile and Family, write the purpose statement.</li>
+    <li><b>Weeks 2 to 4:</b> start the attestation chain and accreditation first, because they take longest. Tick tasks as you finish them.</li>
+    <li><b>Monthly:</b> update your answers, read the new score, and print a dated PDF to keep a record of progress.</li>
+  </ul>
+  <h3>8.3 A family consultation (shura)</h3>
+  <ol>
+    <li>Open the Family tab with your spouse and enter the household together.</li>
+    <li>Read the affordability gauge. Aim for a buffer of at least 20% of salary.</li>
+    <li>Discuss schooling, housing, and the fallback plan if the move fails. Add notes on the Action Plan tab.</li>
+    <li>Tick <i>My family has agreed to the plan</i> only after everyone has spoken.</li>
+  </ol>
+  <h3>8.4 Entrepreneurs and investors</h3>
+  <ol>
+    <li>Enter total capital as savings plus other investable capital, and set <i>Plan to launch or fund a Saudi company?</i> to Yes.</li>
+    <li>On Pathways, compare Founder and investor with the three Premium routes. Open each card's watch-outs.</li>
+    <li>On Costs, set the horizon to match the planned stay and read where Annual overtakes Permanent.</li>
+    <li>Confirm thresholds with MISA and pr.gov.sa before committing any capital.</li>
+  </ol>
+  <h3>8.5 Linking to your CRM</h3>
+  <p>If your CRM tracks clients through the six Creed-to-Commerce™ stages, paste the copied summary text into the client's card after each session. The six stage scores in the summary line up with your stage columns, so you can see at a glance which stage each client is stuck in.</p>
+</section>
+
+<!-- 9 -->
+<section class="chap" id="c9">
+  <h2><span class="cn">9</span>Worked example</h2>
+  <p class="lead">The sample client, Yusuf Rahman, is fictional. This walk-through shows how to read the results. Load him with <span class="bm ghost">Load Sample Data</span> to follow along.</p>
+  <div class="prose">
+    <h3>The client</h3>
+    <p>Yusuf is 38, has a master's degree, and has 11 years in aquaculture and agri-systems engineering. He is a manager, speaks fluent English and basic Arabic, and targets the agri-tech and food-security sector. His profession is regulated and his accreditation is in progress. He is interviewing, with a target salary of SAR 22,000 a month. He has SAR 150,000 in savings and SAR 250,000 in other capital, plans to stay seven years, and will bring his wife, one son under 18, and one daughter. He has not yet attested his degree or ordered police clearance.</p>
+  </div>
+  <div class="tablewrap"><table>
+    <caption>What the app reports for Yusuf</caption>
+    <thead><tr><th>Result</th><th>Value</th><th>How to read it</th></tr></thead>
+    <tbody>
+      <tr><td>Overall readiness</td><td class="num"><b>68</b>, Nearly ready</td><td>Two or three gaps from launch-ready.</td></tr>
+      <tr><td>Stage scores</td><td class="num">Creed 100, Calling 91, Credentials 52, Contract 57, Compliance 75, Commerce 55</td><td>Strong purpose and market position. Credentials is the weakest stage and the lever that moves the overall score most, because it carries the largest weight.</td></tr>
+      <tr><td>Likely skill band</td><td>High-Skill</td><td>Master's, 11 years, manager, and a SAR 22,000 salary together reach nine or more points.</td></tr>
+      <tr><td>Top gaps</td><td>Start degree attestation, finish accreditation, order police clearance, learn compliance basics</td><td>The first three are all Credentials items.</td></tr>
+      <tr><td>Best entry route</td><td>Priority-Sector and Giga-Project Hire, fit 90</td><td>His sector is a Vision priority, he has 11 years, and he is High-Skill. Private sponsor follows at 65.</td></tr>
+      <tr><td>Best anchor route</td><td>Premium Annual, fit 80</td><td>Total capital of SAR 400,000 and a 7-year stay fit the Annual route. Founder and investor scores 30. Premium Talent scores only 10 because no Talent track threshold is met yet.</td></tr>
+      <tr><td>Timeline (start 2 Nov 2026, priority route)</td><td class="num">5 Apr 2027, 30 Aug 2027, 12 Jun 2028</td><td>Best, likely, and slow finishes: 22, 43, and 84 weeks.</td></tr>
+      <tr><td>Landing capital</td><td class="num">SAR 40,000</td><td>SAR 21,900 for arrival plus SAR 18,100 for the family's first year. His savings cover this several times over.</td></tr>
+      <tr><td>Sponsored fees per year</td><td class="num">SAR 24,650</td><td>SAR 10,250 normally paid by the employer plus SAR 14,400 for three dependents.</td></tr>
+      <tr><td>Family costs</td><td class="num">Year 1: SAR 18,100. Year 2 on: SAR 18,900</td><td>Household cost is SAR 14,075 a month.</td></tr>
+      <tr><td>Affordability</td><td class="num">Surplus SAR 7,925 a month (36%)</td><td>Healthy buffer, above the 20% target.</td></tr>
+      <tr><td>Runway</td><td class="num">10.7 months</td><td>Savings divided by monthly household cost.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="prose">
+    <h3>What the coach would do next</h3>
+    <ol>
+      <li>Start the degree attestation chain today, since reports range from about one to four months.</li>
+      <li>Finish professional accreditation, which is already in progress and gates other routes.</li>
+      <li>Order police clearance and certified translations.</li>
+      <li>Tick the compliance-understanding box only after walking through the 90-day Iqama window and the renewal rules.</li>
+    </ol>
+    <div class="note"><b>A question worth discussing</b>Premium Annual costs SAR 100,000 a year, while sponsored fees are about SAR 10,250 a year and are normally paid by the employer. The extra cost buys independence from a single sponsor. The coach should discuss whether Yusuf values that independence enough, and when. The cost chart makes the trade-off visible.</div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="chap pb" id="c10">
+  <h2><span class="cn">10</span>Troubleshooting and FAQ</h2>
+  <details class="faq"><summary>The Print button does nothing.</summary><div><p>Printing is blocked inside previews, chat windows, and some embedded viewers. Open the file in a normal tab of Chrome, Edge, Safari, or Firefox and try again. If a pop-up blocker is active, allow it for this file.</p></div></details>
+  <details class="faq"><summary>My PDF has no colors or looks plain.</summary><div><p>Turn on <i>Background graphics</i> (Chrome and Edge) or <i>Print backgrounds</i> (Firefox and Safari) in the print dialog, then save again.</p></div></details>
+  <details class="faq"><summary>My answers vanished.</summary><div><p>Answers live in the browser's local storage for one page address. They disappear if you used a private window, cleared site data, switched browsers or devices, or opened the file from a different folder or web address. Print a PDF after important sessions so a record exists outside the browser.</p></div></details>
+  <details class="faq"><summary>Every route shows a fit of zero.</summary><div><p>The profile is empty. Enter at least one of degree, experience, salary, sector, or name, and the scores appear. They rise as you complete more fields.</p></div></details>
+  <details class="faq"><summary>Why does Premium Talent score only 10?</summary><div><p>10 is the floor. The Talent tracks need specific facts: healthcare plus completed accreditation and a master's, a doctorate with a salary of SAR 14,000 or more in an education sector, or a C-suite role at SAR 80,000 a month or more. Until you meet one, the score stays low.</p></div></details>
+  <details class="faq"><summary>The Family tab is empty.</summary><div><p>It shows results once you set a spouse answer or enter dependents, sons, parents, or housing. Choose <i>No</i> in <i>Spouse to sponsor</i> if you travel alone and want to see the other results.</p></div></details>
+  <details class="faq"><summary>Can I change the levy, dependent fee, or Premium fees?</summary><div><p>Not on screen in this edition. You can edit the eight landing-budget figures and the insurance amount per dependent. The statutory rates are built into the calculations. If a rule changes, update the file before relying on the totals, and note that in client reports.</p></div></details>
+  <details class="faq"><summary>The Timeline start date is blank. Is that a problem?</summary><div><p>No. The app counts from today when you leave it blank. Set a real date to get meaningful calendar dates.</p></div></details>
+  <details class="faq"><summary>Which pathway should I pick?</summary><div><p>Use the ranking as a conversation starter. Pick one route from Lane A to get in and one from Lane B to build toward. Check the watch-outs and confirm requirements on the official channel named on the card before you act.</p></div></details>
+  <details class="faq"><summary>Is there an Arabic version?</summary><div><p>The app is in English. Arabic appears only in the Basmala at the top of the app and the report. A translated edition would need new text throughout.</p></div></details>
+  <details class="faq"><summary>Does it work on a phone?</summary><div><p>Yes. Every tab adapts to a narrow screen and wide tables scroll sideways. Printing from a phone depends on the device, so a desktop browser is best for reports.</p></div></details>
+  <details class="faq"><summary>Can two people work on the same plan?</summary><div><p>Not at the same time. There is no sync. Pass the printed PDF, or share one device.</p></div></details>
+  <details class="faq"><summary>Does the app submit anything to the government?</summary><div><p>No. It is a planning and coaching tool. All applications go through the official channels: Qiwa, Absher, Muqeem, MOFA, MISA, and the Premium Residency Center.</p></div></details>
+  <details class="faq"><summary>Is this legal advice?</summary><div><p>No. It is educational coaching material. Rules change, and several figures come from secondary guides. Confirm every requirement officially and consult a qualified adviser for your own case.</p></div></details>
+  <details class="faq"><summary>I clicked Erase My Data by mistake.</summary><div><p>The first click only changes the label. Data is erased only by a second click within four seconds. If it was erased, the data cannot be recovered, so reload the sample or re-enter from your last printed report.</p></div></details>
+</section>
+
+<!-- 11 -->
+<section class="chap" id="c11">
+  <h2><span class="cn">11</span>Glossary</h2>
+  <dl class="gl">
+    <dt>Iqama</dt><dd>The residence permit issued to foreigners living in Saudi Arabia.</dd>
+    <dt>Absher</dt><dd>The Ministry of Interior's online service for exit and re-entry visas, family visas, and Iqama renewals.</dd>
+    <dt>Muqeem</dt><dd>The online service where residents and employers check Iqama records. Also the name of the resident ID card.</dd>
+    <dt>Qiwa</dt><dd>The labor-market platform where employers register contracts and manage work permits.</dd>
+    <dt>MHRSD or HRSD</dt><dd>The Ministry of Human Resources and Social Development, which regulates work permits and Saudization.</dd>
+    <dt>MOFA</dt><dd>The Ministry of Foreign Affairs. It authorizes visas and attests documents.</dd>
+    <dt>MISA</dt><dd>The Ministry of Investment. It licenses foreign investors and endorses Investor residency.</dd>
+    <dt>Monsha'at</dt><dd>The authority that supports small and medium enterprises and startups.</dd>
+    <dt>Premium Residency Center</dt><dd>The body that issues Premium Residency, reached at pr.gov.sa.</dd>
+    <dt>Nitaqat</dt><dd>The program that rates employers by their share of Saudi staff and sets service levels such as Platinum, Green, Yellow, and Red. The 2026 to 2028 phase aims to localize more than 340,000 additional private-sector jobs.</dd>
+    <dt>Saudization</dt><dd>Policy that reserves and prioritizes jobs for Saudi nationals, with quotas by sector.</dd>
+    <dt>Mehna</dt><dd>The profession recorded on your Iqama. It must match your real job.</dd>
+    <dt>Skill band</dt><dd>The High-Skill, Skilled, and Basic classification of work permits based on education, experience, skills, wage, and age.</dd>
+    <dt>Work-permit levy</dt><dd>The monthly fee an employer pays for each foreign worker, reported at SAR 800.</dd>
+    <dt>Dependent fee</dt><dd>The monthly fee for each sponsored family member, reported at SAR 400.</dd>
+    <dt>GOSI</dt><dd>The General Organization for Social Insurance. Employees are registered with it.</dd>
+    <dt>SCFHS</dt><dd>The Saudi Commission for Health Specialties, which recognizes health practitioners.</dd>
+    <dt>KACST</dt><dd>King Abdulaziz City for Science and Technology, a possible endorser for the Science and Research Talent track.</dd>
+    <dt>REGA</dt><dd>The General Real Estate Authority, which accredits property valuations and designates zones for foreign ownership.</dd>
+    <dt>Watheeq</dt><dd>The title-deed system used to prove property ownership.</dd>
+    <dt>Jawazat</dt><dd>The passport authority that processes Iqama issuance and biometrics.</dd>
+    <dt>Wasil and National Address</dt><dd>Your registered address and the postal service that delivers the Iqama card to it.</dd>
+    <dt>Tasattur</dt><dd>Concealment. Hiding true ownership of a business behind a nominee, which is an offence.</dd>
+    <dt>Lane A, B, C</dt><dd>This app's grouping of routes: A enters, B anchors, and C widens residency to the family.</dd>
+    <dt>Fit score</dt><dd>The app's 0 to 100 coaching index for a route.</dd>
+    <dt>Landing capital</dt><dd>The cash you need to arrive and settle: arrival costs plus the family's first year.</dd>
+    <dt>Runway</dt><dd>How many months your savings cover your household costs.</dd>
+    <dt>Vision 2030</dt><dd>Saudi Arabia's national transformation plan, launched in 2016 around a vibrant society, a thriving economy, and an ambitious nation.</dd>
+    <dt>Creed-to-Commerce™</dt><dd>The BMPA framework in which commercial activity begins in a creed and stays accountable to it. Here it organizes the plan into six stages.</dd>
+  </dl>
+</section>
+
+<!-- 12 -->
+<section class="chap" id="c12">
+  <h2><span class="cn">12</span>Limits and sources</h2>
+  <div class="prose">
+    <h3>Responsibilities</h3>
+    <p>Iqama Compass is educational coaching material from The Balanced Middle Path Academy, LLC. It is not legal or immigration advice, and it does not file anything with any government. Fees, thresholds, and rules change often. Several figures come from secondary guides that cite 2026 rules, and one source reported a SAR 4,000 permanent residency scheme that conflicts with the SAR 800,000 fee in the other sources. Treat that item as unconfirmed.</p>
+    <p>Before you act, confirm each requirement on the official channels: Qiwa, Absher, Muqeem, the Ministry of Foreign Affairs, MISA, the Premium Residency Center (pr.gov.sa), and your professional body. Scores, fit indexes, and timeline ranges are planning aids built from published thresholds and coaching judgment.</p>
+    <div class="note"><b>Property in Makkah and Madinah</b>The foreign real-estate ownership law, effective January 2026, generally prohibits foreign ownership in Makkah and Madinah, with narrow exceptions for Muslims such as inheritance and religious endowments (waqf). Zones elsewhere open gradually, starting with Riyadh and Jeddah. Confirm specifics with REGA before buying.</div>
+    <h3>Sources consulted (October 2026)</h3>
+    <ul class="small">
+      <li><a href="https://www.middleeastbriefing.com/news/saudi-arabia-iqama-and-visa-rules-what-changed-in-q1-2026/" target="_blank" rel="noopener">Middle East Briefing: Iqama and visa rules, Q1 2026</a></li>
+      <li><a href="https://ksaexpats.com/check-iqama-fees-in-saudi-arabia/" target="_blank" rel="noopener">KSA Expats: Iqama fees 2026</a></li>
+      <li><a href="https://workpermitguide.com/en/saudi-arabia/work-visa" target="_blank" rel="noopener">Work Permit Guide: Saudi work visa process and Nitaqat</a></li>
+      <li><a href="https://ksaguides.com/iqama-saudi-arabia/" target="_blank" rel="noopener">KSA Guides: Iqama in Saudi Arabia 2026</a></li>
+      <li><a href="https://ksaexpats.com/permanent-family-visa-saudi-arabia/" target="_blank" rel="noopener">KSA Expats: Permanent family visa 2026</a></li>
+      <li><a href="https://newtosaudi.com/relocate/premium-residency" target="_blank" rel="noopener">New to Saudi: Premium Residency tiers</a></li>
+      <li><a href="https://www.envoyglobal.com/news-alert/saudi-arabia-announces-new-nitaqat-phase-for-2026-2028/" target="_blank" rel="noopener">Envoy Global: Nitaqat phase 2026 to 2028</a></li>
+      <li><a href="https://www.gtlaw.com/-/media/files/insights/alerts/2025/07/gt-alert_saudi-arabia-enacts-new-real-estate-foreign-ownership-law-a-calibrated-opening-for-foreign-investors.pdf" target="_blank" rel="noopener">Greenberg Traurig: Foreign real-estate ownership law</a></li>
+      <li><a href="https://sa.andersen.com/myblog/key-achievements-of-saudi-vision-2030-after-ten-years/" target="_blank" rel="noopener">Andersen: Vision 2030 after ten years</a></li>
+      <li><a href="https://www.expat.com/en/forum/middle-east/saudi-arabia/233011-time-taken-for-attestation-and-processing-of-saudi-work-visa.html" target="_blank" rel="noopener">Expat.com forum: attestation and visa timing (anecdotal)</a></li>
+    </ul>
+    <h3>Edition notes</h3>
+    <p class="small muted">Manual edition 1.0, October 2026, for the first release of Iqama Compass. Check this manual against the app after any update to its fees, rules, or tabs.</p>
+  </div>
+</section>
+
+<!-- A -->
+<section class="chap pb" id="ca">
+  <h2><span class="cn">A</span>Fee and rule reference</h2>
+  <p class="lead">Figures as reported in the 2026 guides listed in Chapter 12. The last column shows whether the app's calculations use the figure. Verify everything officially.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Item</th><th>Reported figure</th><th>Used in app maths</th></tr></thead>
+    <tbody>
+      <tr><td>Iqama issue or renewal, per employee</td><td>About SAR 650 a year; SAR 51.75 service fee per transaction</td><td>Yes (SAR 650)</td></tr>
+      <tr><td>Work-permit levy (employer)</td><td>SAR 800 a month, SAR 9,600 a year; SAR 700 a month reported for Saudization-compliant firms</td><td>Yes (SAR 9,600)</td></tr>
+      <tr><td>Dependent fee</td><td>SAR 400 a month per dependent; 90 days exempt for new arrivals</td><td>Yes (9 months in year 1)</td></tr>
+      <tr><td>Family visa fee</td><td>SAR 2,000 per family; SAR 30 chamber attestation</td><td>Editable (SAR 2,000)</td></tr>
+      <tr><td>Sponsor transfer fees</td><td>SAR 2,000, then 4,000, then 6,000</td><td>No</td></tr>
+      <tr><td>Late Iqama renewal</td><td>SAR 500, then SAR 1,000, then possible deportation</td><td>No</td></tr>
+      <tr><td>Profession change</td><td>SAR 1,000 (employer pays)</td><td>No</td></tr>
+      <tr><td>Medical exam</td><td>SAR 200 to 500</td><td>Editable (SAR 400)</td></tr>
+      <tr><td>Health insurance</td><td>SAR 500 to 2,000 or more a year; required for renewal</td><td>Editable (SAR 1,500 per dependent)</td></tr>
+      <tr><td>Premium Residency, Annual</td><td>SAR 100,000 a year</td><td>Yes</td></tr>
+      <tr><td>Premium Residency, Permanent</td><td>SAR 800,000 once; a SAR 4,000 scheme is reported by one source and is unconfirmed</td><td>Yes (SAR 800,000)</td></tr>
+      <tr><td>Premium Residency, Real estate</td><td>Completed, mortgage-free freehold property of SAR 4,000,000 or more</td><td>Fit tiers only</td></tr>
+      <tr><td>Special Talent thresholds</td><td>Science and Research about SAR 14,000 a month; Executive about SAR 80,000 a month; Healthcare needs SCFHS recognition</td><td>Fit rules</td></tr>
+      <tr><td>Premium approval time</td><td>About 30 to 60 days after a complete file; card within about 14 days of payment; incomplete files add 7 to 14 days</td><td>Timeline phases</td></tr>
+      <tr><td>Family sponsor salary test</td><td>At least SAR 3,500 a month, Iqama with 3 or more months left</td><td>Yes (SAR 3,500)</td></tr>
+      <tr><td>Who can be sponsored</td><td>One wife, sons under 18, unmarried daughters; not parents or siblings</td><td>Yes</td></tr>
+      <tr><td>Iqama application window</td><td>Within 90 days of arrival</td><td>Guidance only</td></tr>
+      <tr><td>Passport validity</td><td>At least 6 months for visas; 90 days for exit and re-entry visas</td><td>Check box</td></tr>
+      <tr><td>Transfer without sponsor consent</td><td>After one year for qualifying workers</td><td>Guidance only</td></tr>
+      <tr><td>Saudization quotas</td><td>Medical labs 70%, hospitals 65%, marketing and sales 60%, dentistry 45 to 55%, accounting 40% (rising 10 points a year to 2028), engineering 30%</td><td>Guidance only</td></tr>
+      <tr><td>Exchange rate</td><td>SAR 3.75 per US dollar</td><td>Yes</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- B -->
+<section class="chap" id="cb">
+  <h2><span class="cn">B</span>Template task list</h2>
+  <p class="lead">The 31 tasks that load on the Action Plan tab. Delete or add tasks to suit each client, or restore this list at any time.</p>
+  <h3><span class="dot" style="--c:var(--s1)"></span>1. Creed (5 tasks)</h3><ol><li><b>Write your purpose statement.</b> Why Saudi Arabia, why now, and whom the move serves. Aim for 3 to 5 sentences.</li><li><b>Hold a family consultation (shura).</b> Agree on timing, schooling, housing, and the fallback if the plan fails.</li><li><b>Set a 10-year horizon.</b> Decide whether you aim for a stay of 3 years, 7 years, or permanence.</li><li><b>Sign the integrity pledge.</b> No paid visas, no work on a visit visa, no concealed ownership.</li><li><b>Build a six-month runway budget.</b> Include flights, deposits, and a gap before the first salary.</li></ol><h3><span class="dot" style="--c:var(--s2)"></span>2. Calling (5 tasks)</h3><ol><li><b>Match your profession to the Saudi classification.</b> Check that your title fits an eligible profession and the skills-based band.</li><li><b>Choose two Vision 2030 sectors.</b> Pick sectors where your skill is scarce (see the Vision 2030 tab).</li><li><b>Prepare a Saudi-ready CV and LinkedIn profile.</b> Show results, certifications, and mentoring of local talent.</li><li><b>Build a list of 30 target employers.</b> Mix direct employers, contractors, and recruiters you have vetted.</li><li><b>Start Arabic basics.</b> Greetings, workplace phrases, and numbers raise trust fast.</li></ol><h3><span class="dot" style="--c:var(--s3)"></span>3. Credentials (6 tasks)</h3><ol><li><b>Check passport validity.</b> At least 6 months for the visa and 90 days for exit and re-entry.</li><li><b>Start the degree attestation chain.</b> Home authentication, Saudi embassy, and MOFA as required. Often the longest step.</li><li><b>Order police clearance.</b> Keep originals and certified translations ready.</li><li><b>Begin professional accreditation if regulated.</b> SCFHS, engineering, accounting, or your own professional body.</li><li><b>Book your medical check.</b> Use an approved center; results can expire, so time it to the visa.</li><li><b>Attest marriage and birth certificates.</b> Needed for family sponsorship. Allow several weeks.</li></ol><h3><span class="dot" style="--c:var(--s4)"></span>4. Contract (5 tasks)</h3><ol><li><b>Get the offer in writing.</b> Role, profession on the Iqama, salary, term, housing, flights, and family benefits.</li><li><b>Confirm contract is registered on Qiwa.</b> The registered profession must match your real job.</li><li><b>Confirm the employer pays Iqama, levy, and insurance.</b> You should not pay for your own visa or levy.</li><li><b>Collect the visa stamp.</b> At a Saudi embassy or consulate once MOFA approves.</li><li><b>Travel inside the visa window.</b> Book flights only after the stamp is in your passport.</li></ol><h3><span class="dot" style="--c:var(--s5)"></span>5. Compliance (6 tasks)</h3><ol><li><b>Finish medical, fingerprints, and Iqama in 90 days.</b> The 90-day window starts on arrival.</li><li><b>Activate Absher and Muqeem.</b> Check expiry dates yourself every month.</li><li><b>Set expiry alerts at 90, 60, and 30 days.</b> Do not rely only on the employer's calendar.</li><li><b>Register your National Address.</b> The card is delivered by post to that address.</li><li><b>Confirm health insurance and GOSI registration.</b> Insurance is a condition of renewal.</li><li><b>Sponsor your family once your Iqama has 3+ months left.</b> Use Absher with the company-attested documents.</li></ol><h3><span class="dot" style="--c:var(--s6)"></span>6. Commerce (4 tasks)</h3><ol><li><b>Review transfer freedom at month 12.</b> Qualifying workers can transfer without sponsor consent after one year.</li><li><b>Choose a Premium Residency category.</b> Talent, Annual, Permanent, Real estate, Investor, or Entrepreneur.</li><li><b>Build the capital plan for your target category.</b> Annual SAR 100,000 a year, Permanent SAR 800,000, Real estate SAR 4,000,000.</li><li><b>Document your contribution to Vision 2030.</b> Training delivered, jobs created, exports, patents, projects.</li></ol>
+</section>
+</main>
+</div>
+
+<footer class="site"><div class="wrap">
+  <b>Creed-to-Commerce™</b>
+  <span>The Balanced Middle Path Academy, LLC</span>
+  <span class="small">Iqama Compass User's Manual, edition 1.0, October 2026. Educational material, not legal or immigration advice.</span>
+</div></footer>
+
+<script>
+(function(){
+  var toc=document.getElementById('toc');
+  try{if(window.innerWidth<=920)toc.removeAttribute('open');}catch(e){}
+  window.addEventListener('beforeprint',function(){toc.setAttribute('open','');});
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.remove('on');});var a=map[e.target.id];if(a)a.classList.add('on');}});
+    },{rootMargin:'-20% 0px -70% 0px'});
+    [].slice.call(document.querySelectorAll('.chap')).forEach(function(c){io.observe(c);});
+  }
+  var pb=document.getElementById('printMan');
+  if(pb)pb.addEventListener('click',function(){
+    [].slice.call(document.querySelectorAll('details.faq')).forEach(function(d){d.setAttribute('open','');});
+    try{window.print();}catch(e){}
+  });
+})();
+</script>
+</body>
+</html>
